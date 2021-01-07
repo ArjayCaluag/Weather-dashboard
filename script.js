@@ -5,6 +5,8 @@ let cityName = "Hayward";
 let apiKey = '&appid=b540f485d7fc2dc82c2bec349be77cf3' ;
 let queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+cityName + '&units=imperial'+ apiKey;
 
+
+
 $.ajax({
     url: queryURL,
     method: "GET",
@@ -12,8 +14,10 @@ $.ajax({
 }).then(function(response){
 console.log(response);
 $('#currentWeather').empty();
+
+let currentDate = moment().subtract(10, 'days').calendar();
 let newDiv = $('<div>')
-let cityName = $('<h1>').text(response.name)
+let cityName = $('<h1>').text(response.name + ' ' + currentDate)
 let cityTemp = $('<p>').text('Temperature: '+ response.main.temp+'F')
 let cityHumid = $('<p>').text('Humidity: ' + response.main.humidity + ' %')
 let citySpeed = $('<p>').text('Wind Speed '+ response.wind .speed + ' MPH')
