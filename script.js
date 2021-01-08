@@ -14,7 +14,7 @@ $(document).ready(function () {
             console.log(response);
             $('#currentWeather').empty();
 
-            let currentDate = moment().format('L');
+            let currentDate = moment().format('L');;
             let cityName = $('<h1>').text(response.name + ' ' + currentDate)
             let cityTemp = $('<p>').text('Temperature: ' + response.main.temp + 'F')
             let cityHumid = $('<p>').text('Humidity: ' + response.main.humidity + ' %')
@@ -52,14 +52,14 @@ $(document).ready(function () {
     // function that creates new button with our search history
     function historyButton() {
         let getStorage = JSON.parse(localStorage.getItem('city'));
-        let newButton = $("<button>").addClass('row btn btn-primary').text(getStorage);
+        let newButton = $("<button>").addClass('row histButton card bg-light shadow-lg bg-white').text(getStorage);
         $('#historyButton').append(newButton);
 
     }
 
     // Event listener for our new buttons that allow us to pull up information from previous searches
 
-    $("#historyButton").on("click", '.btn', function (event) {
+    $("#historyButton").on("click", '.histButton', function (event) {
         event.preventDefault();
         searchCity($(this).text())
         fiveDay($(this).text());

@@ -1,0 +1,14 @@
+.btn {
+    display: block;
+    
+}
+
+.histButton {
+    display:block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.inputField {
+    position: relative;
+}
