@@ -2,7 +2,7 @@ $(document).ready(function () {
     let apiKey = '&appid=b540f485d7fc2dc82c2bec349be77cf3';
     function searchCity(cities) {
 
-        let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cities + '&units=imperial' + apiKey;
+        let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cities + '&units=imperial' + apiKey;
         let newDiv = $('<div>')
 
         // Calling the openweathermap API
@@ -15,7 +15,7 @@ $(document).ready(function () {
             $('#currentWeather').empty();
 
             let currentDate = moment().format('L');
-            let cityIcon = $('<img>').attr("src", 'http://openweathermap.org/img/w/' + response.weather[0].icon + '.png')
+            let cityIcon = $('<img>').attr("src", 'https://openweathermap.org/img/w/' + response.weather[0].icon + '.png')
             let cityName = $('<h1>').text(response.name + ' ' + currentDate)
             let cityTemp = $('<p>').text('Temperature: ' + response.main.temp + 'F')
             let cityHumid = $('<p>').text('Humidity: ' + response.main.humidity + ' %')
@@ -28,7 +28,7 @@ $(document).ready(function () {
             // Another AJAX to retried UV index of city
             let lat = response.coord.lat
             let lon = response.coord.lon
-            let queryUV = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + apiKey;
+            let queryUV = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + apiKey;
             $.ajax({
 
                 url: queryUV,
@@ -96,7 +96,7 @@ $(document).ready(function () {
     // Function to call 5-day forecast api 
     // Create card dynamically with for loop
     function fiveDay(cityName) {
-        let queryURL = `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}${apiKey}&units=imperial`;
+        let queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}${apiKey}&units=imperial`;
 
 
         $.ajax({
