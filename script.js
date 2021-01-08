@@ -20,16 +20,32 @@ $(document).ready(function () {
             let cityTemp = $('<p>').text('Temperature: ' + response.main.temp + 'F')
             let cityHumid = $('<p>').text('Humidity: ' + response.main.humidity + ' %')
             let citySpeed = $('<p>').text('Wind Speed ' + response.wind.speed + ' MPH')
-            console.log(cityIcon)
             // appends all of our dynamic html to our currentWeather div tag
             newDiv.append(cityName,cityIcon, cityTemp, cityHumid, citySpeed)
 
             $('#currentWeather').append(newDiv)
-        })
+       
+        // Another AJAX to retried UV index of city
+        let lat = response.coord.lat;
+        let lon = response.coord.lon
+        let queryUV = "http://api.openweathermap.org/data/2.5/uvi?lat=" +lat+ "&lon=" +lon + apiKey;
+        $.ajax({
+            
+            url: queryUV,
+            method: 'GET'
+        }).then(function(response){
+          
+            let cityUV = $('<p>').text("UV Index: "+ response.value)
+            newDiv.append(cityUV);
+            $('#currentWeather').append(newDiv)
+        });
+    })
+
         
     }
 
     historyButton();
+
    
 
     // event listener onClick - perform this work
@@ -87,8 +103,8 @@ $(document).ready(function () {
                 // New javascript methods that returns a string to a date.
                 let dateDiv = $('<h4>').addClass('date-div').text(new Date(res.list[i].dt_txt).toLocaleDateString())
                 let iconDiv = $('<img>').addClass('icon-div').attr("src", `http://openweathermap.org/img/w/${res.list[i].weather[0].icon}.png`);
-                let humidityDiv = $('<p>').addClass('humidity-div').text(`Humidity: ${res.list[i].main.humidity}`)
-                let tempDiv = $('<p>').addClass('temp-div').text(`Temp: ${res.list[i].main.temp}`)
+                let humidityDiv = $('<p>').addClass('humidity-div').text(`Humidity: ${res.list[i].main.humidity}%`)
+                let tempDiv = $('<p>').addClass('temp-div').text(`Temp: ${res.list[i].main.temp}F`)
 
                 forecastDiv.append(dateDiv, iconDiv, humidityDiv, tempDiv)
                 $('#dayForecast').append(forecastDiv);
