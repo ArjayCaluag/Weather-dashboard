@@ -14,17 +14,19 @@ $(document).ready(function () {
             console.log(response);
             $('#currentWeather').empty();
 
-            let currentDate = moment().format('L');;
+            let currentDate = moment().format('L');
+            let cityIcon = $('<img>').attr("src", 'http://openweathermap.org/img/w/' + response.weather[0].icon + '.png')
             let cityName = $('<h1>').text(response.name + ' ' + currentDate)
             let cityTemp = $('<p>').text('Temperature: ' + response.main.temp + 'F')
             let cityHumid = $('<p>').text('Humidity: ' + response.main.humidity + ' %')
             let citySpeed = $('<p>').text('Wind Speed ' + response.wind.speed + ' MPH')
-
+            console.log(cityIcon)
             // appends all of our dynamic html to our currentWeather div tag
-            newDiv.append(cityName, cityTemp, cityHumid, citySpeed)
+            newDiv.append(cityName,cityIcon, cityTemp, cityHumid, citySpeed)
 
             $('#currentWeather').append(newDiv)
         })
+        
     }
 
     historyButton();
