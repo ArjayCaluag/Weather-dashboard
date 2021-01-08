@@ -21,32 +21,42 @@ $(document).ready(function () {
             let cityHumid = $('<p>').text('Humidity: ' + response.main.humidity + ' %')
             let citySpeed = $('<p>').text('Wind Speed ' + response.wind.speed + ' MPH')
             // appends all of our dynamic html to our currentWeather div tag
-            newDiv.append(cityName,cityIcon, cityTemp, cityHumid, citySpeed)
+            newDiv.append(cityName, cityIcon, cityTemp, cityHumid, citySpeed)
 
             $('#currentWeather').append(newDiv)
-       
-        // Another AJAX to retried UV index of city
-        let lat = response.coord.lat;
-        let lon = response.coord.lon
-        let queryUV = "http://api.openweathermap.org/data/2.5/uvi?lat=" +lat+ "&lon=" +lon + apiKey;
-        $.ajax({
-            
-            url: queryUV,
-            method: 'GET'
-        }).then(function(response){
-          
-            let cityUV = $('<p>').text("UV Index: "+ response.value)
-            newDiv.append(cityUV);
-            $('#currentWeather').append(newDiv)
-        });
-    })
 
-        
+            // Another AJAX to retried UV index of city
+            let lat = response.coord.lat
+            let lon = response.coord.lon
+            let queryUV = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + apiKey;
+            $.ajax({
+
+                url: queryUV,
+                method: 'GET'
+            }).then(function (response) {
+
+                let uvValue = response.value
+                console.log(uvValue);
+                let cityUV = $('<p>').text("UV Index: " + response.value).addClass("cityText")
+
+                if (uvValue <= 2) {
+                    cityUV.css("background-color", "green");
+                } else if (uvValue <= 5) {
+                    cityUV.css("background-color", "yellow");
+                } else if (uvValue <= 7) {
+                    cityUV.css("background-color", "orange");
+                } else {
+                    cityUV.css("background-color", "red");
+                }
+                newDiv.append(cityUV);
+                $('#currentWeather').append(newDiv)
+            });
+        })
+
     }
 
     historyButton();
 
-   
 
     // event listener onClick - perform this work
     $('#searchCity').on("click", function (event) {

@@ -12,3 +12,9 @@
 .inputField {
     position: relative;
 }
+
+.cityText {
+    color: white;
+    width: 25%;
+    text-align: center;
+}
