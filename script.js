@@ -14,7 +14,7 @@ $(document).ready(function () {
             console.log(response);
             $('#currentWeather').empty();
 
-            let currentDate = moment().subtract(10, 'days').calendar();
+            let currentDate = moment().format('L');
             let cityName = $('<h1>').text(response.name + ' ' + currentDate)
             let cityTemp = $('<p>').text('Temperature: ' + response.main.temp + 'F')
             let cityHumid = $('<p>').text('Humidity: ' + response.main.humidity + ' %')
@@ -28,7 +28,7 @@ $(document).ready(function () {
     }
 
     historyButton();
-
+   
 
     // event listener onClick - perform this work
     $('#searchCity').on("click", function (event) {
@@ -46,7 +46,7 @@ $(document).ready(function () {
 
         searchCity(inputCity)
         historyButton();
-
+        fiveDay(inputCity);
     });
 
     // function that creates new button with our search history
@@ -61,7 +61,7 @@ $(document).ready(function () {
 
     $("#historyButton").on("click", '.btn', function (event) {
         event.preventDefault();
-        searchCity($(this).text());
+        searchCity($(this).text())
         fiveDay($(this).text());
     });
 
@@ -75,6 +75,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (res) {
+            $('#dayForecast').empty();
 
             // Time tracks in increments of 3 hours I've chosen to given the 5 day forecast around 12pm each day.
             // First 5pm report is in index 4 and every increment of 8.
