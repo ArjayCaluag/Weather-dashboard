@@ -98,7 +98,7 @@ $(document).ready(function () {
             // Time tracks in increments of 3 hours I've chosen to given the 5 day forecast around 12pm each day.
             // First 5pm report is in index 4 and every increment of 8.
             for (let i = 4; i < 40; i += 8) {
-                let forecastDiv = $('<div>').addClass('card-body col-2');
+                let forecastDiv = $("<div>").addClass("col-2 card shadow-lg text-white bg-primary mx-2 p-2>");
 
                 // New javascript methods that returns a string to a date.
                 let dateDiv = $('<h4>').addClass('date-div').text(new Date(res.list[i].dt_txt).toLocaleDateString())
