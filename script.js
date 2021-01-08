@@ -29,6 +29,7 @@ $(document).ready(function () {
 
     historyButton();
    
+   
     // event listener onClick - perform this work
     $('#searchCity').on("click", function (event) {
         // stops the page from trying to submit a form
@@ -45,14 +46,25 @@ $(document).ready(function () {
         
         searchCity(inputCity)
         historyButton();
+       
     });
 
-    // function creates new button
+    // function that creates new button with our search history
     function historyButton(){
         let getStorage = JSON.parse(localStorage.getItem('city'));
         let newButton = $("<button>").addClass('row btn btn-primary').text(getStorage);
         $('#historyButton').append(newButton);
 
     }
+
+    // Event listener for our new buttons that allow us to pull up information from previous searches
+
+    $("#historyButton").on("click", '.btn', function(event){
+        event.preventDefault();
+        searchCity($(this).text());
+       
+    });
+  
+
    
 });
