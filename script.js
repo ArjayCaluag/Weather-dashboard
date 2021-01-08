@@ -2,7 +2,7 @@ $(document).ready(function () {
     let apiKey = '&appid=b540f485d7fc2dc82c2bec349be77cf3';
     function searchCity(cities) {
 
-        let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cities + '&units=imperial' + apiKey;
+        let queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + cities + '&units=imperial' + apiKey;
         let newDiv = $('<div>')
 
         // Calling the openweathermap API
